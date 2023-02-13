@@ -1,0 +1,931 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>卡顿与性能优化 · iOS面试文档</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../objc/APP启动优化及瘦身.html" />
+    
+    
+    <link rel="prev" href="../objc/内存管理.html" />
+    
+
+    
+    <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chart/c3/c3.min.css">
+    <script src="../../gitbook/gitbook-plugin-chart/c3/d3.min.js"></script>
+    <script src="../../gitbook/gitbook-plugin-chart/c3/c3.min.js"></script>
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    iOS面试问题汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../objc/objc.html">
+            
+                <a href="../objc/objc.html">
+            
+                    
+                    ObjC
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../objc/OC对象的本质.html">
+            
+                <a href="../objc/OC对象的本质.html">
+            
+                    
+                    OC对象的本质
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../objc/KVO和KVC.html">
+            
+                <a href="../objc/KVO和KVC.html">
+            
+                    
+                    KVO和KVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../objc/探索block本质.html">
+            
+                <a href="../objc/探索block本质.html">
+            
+                    
+                    探索block本质
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../objc/Runtime.html">
+            
+                <a href="../objc/Runtime.html">
+            
+                    
+                    Runtime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../objc/RunLoop.html">
+            
+                <a href="../objc/RunLoop.html">
+            
+                    
+                    RunLoop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../objc/多线程与锁.html">
+            
+                <a href="../objc/多线程与锁.html">
+            
+                    
+                    多线程与锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../objc/内存管理.html">
+            
+                <a href="../objc/内存管理.html">
+            
+                    
+                    内存管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.8" data-path="卡顿与性能优化.html">
+            
+                <a href="卡顿与性能优化.html">
+            
+                    
+                    卡顿与性能优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../objc/APP启动优化及瘦身.html">
+            
+                <a href="../objc/APP启动优化及瘦身.html">
+            
+                    
+                    APP启动优化及瘦身
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../objc/iOS与js交互.html">
+            
+                <a href="../objc/iOS与js交互.html">
+            
+                    
+                    iOS与js交互
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../objc/iOS蓝牙开发.html">
+            
+                <a href="../objc/iOS蓝牙开发.html">
+            
+                    
+                    iOS蓝牙开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="framework.html">
+            
+                <a href="framework.html">
+            
+                    
+                    架构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="mvvm.html">
+            
+                <a href="mvvm.html">
+            
+                    
+                    MVVM框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="storage_persistence.html">
+            
+                <a href="storage_persistence.html">
+            
+                    
+                    存储持久化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="security_encryption.html">
+            
+                <a href="security_encryption.html">
+            
+                    
+                    安全与加密
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="组件化.html">
+            
+                <a href="组件化.html">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../swift/swift.html">
+            
+                <a href="../swift/swift.html">
+            
+                    
+                    Swift
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../swift/Swift面试.html">
+            
+                <a href="../swift/Swift面试.html">
+            
+                    
+                    Swift面试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../swift/OC和Swift互调底层实现.html">
+            
+                <a href="../swift/OC和Swift互调底层实现.html">
+            
+                    
+                    OC和Swift互调底层实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../flutter/flutter.html">
+            
+                <a href="../flutter/flutter.html">
+            
+                    
+                    Flutter
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../flutter/Flutter跨平台原理.html">
+            
+                <a href="../flutter/Flutter跨平台原理.html">
+            
+                    
+                    Flutter跨平台原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../flutter/Flutter语法.html">
+            
+                <a href="../flutter/Flutter语法.html">
+            
+                    
+                    Flutter语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../plugin/plugin.html">
+            
+                <a href="../plugin/plugin.html">
+            
+                    
+                    第三方库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../plugin/AFNetworking.html">
+            
+                <a href="../plugin/AFNetworking.html">
+            
+                    
+                    AFNetworking
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../plugin/SDWebimage.html">
+            
+                <a href="../plugin/SDWebimage.html">
+            
+                    
+                    SDWebimage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../plugin/Aspects.html">
+            
+                <a href="../plugin/Aspects.html">
+            
+                    
+                    iOS AOP框架Aspects实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../plugin/RxSwift.html">
+            
+                <a href="../plugin/RxSwift.html">
+            
+                    
+                    RxSwift
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../data_structure/data_structure.html">
+            
+                <a href="../data_structure/data_structure.html">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../data_structure/http与https.html">
+            
+                <a href="../data_structure/http与https.html">
+            
+                    
+                    http与https
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../arithmetic/arithmetic.html">
+            
+                <a href="../arithmetic/arithmetic.html">
+            
+                    
+                    算法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../arithmetic/快速排序.html">
+            
+                <a href="../arithmetic/快速排序.html">
+            
+                    
+                    快速排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.1.2" data-path="../arithmetic/冒泡排序.html">
+            
+                <a href="../arithmetic/冒泡排序.html">
+            
+                    
+                    冒泡排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../links/links.html">
+            
+                <a href="../links/links.html">
+            
+                    
+                    外部链接
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1.1" data-path="../links/《招聘一个靠谱的iOS》面试题参考答案（上）.html">
+            
+                <a href="../links/《招聘一个靠谱的iOS》面试题参考答案（上）.html">
+            
+                    
+                    《招聘一个靠谱的iOS》面试题参考答案（上）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.1.2" data-path="../links/《招聘一个靠谱的iOS》面试题参考答案（下）.html">
+            
+                <a href="../links/《招聘一个靠谱的iOS》面试题参考答案（下）.html">
+            
+                    
+                    《招聘一个靠谱的iOS》面试题参考答案（下）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本書使用 GitBook 釋出
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >卡顿与性能优化</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>&#x4E00;&#x822C;&#x8BA4;&#x4E3A;&#x5361;&#x987F;&#x4E3B;&#x8981;&#x6307;&#x4E3B;&#x7EBF;&#x7A0B;&#x5361;&#x987F;&#x3002;&#x9488;&#x5BF9; UI &#x5361;&#x987F;&#x6216;&#x8005;&#x8BF4;&#x4E3B;&#x7EBF;&#x7A0B;&#x5361;&#x987F;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x79CD;&#x76D1;&#x63A7;&#x65B9;&#x6848;&#xFF1A;</p>
+<ol>
+<li>&#x5229;&#x7528; CADisplayLink &#x6765;&#x76D1;&#x63A7;&#x5237;&#x65B0;&#x7684;&#x5E27;&#x7387;&#xFF0C;&#x8BA1;&#x7B97;&#x5728; 1s &#x5185;&#x5C4F;&#x5E55;&#x5237;&#x65B0;&#x7684;&#x6B21;&#x6570;&#x3002;&#x4E00;&#x822C;&#x8BA4;&#x4E3A; 50fps &#x4EE5;&#x4E0A;&#x4F1A;&#x4E0D;&#x5361;&#x987F;</li>
+<li>&#x5229;&#x7528; runLoop&#x3002;&#x521B;&#x5EFA; runLoop &#x7684;&#x4E00;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x5230;&#x4E3B;&#x7EBF;&#x7A0B; runLoop &#x7684; common &#x6A21;&#x5F0F;&#x4E0B;&#x3002;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4FDD;&#x6301;&#x5B58;&#x6D3B;&#x7684;&#x5B50;&#x7EBF;&#x7A0B;&#xFF0C;&#x76D1;&#x63A7;&#x4E3B; runLoop &#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;&#x505C;&#x7559;&#x5728; kCFRunLoopBeforeSources &#x72B6;&#x6001;&#x6216; kCFRunLoopAfterWaiting &#x72B6;&#x6001;&#xFF0C;&#x5728;&#x8BBE;&#x7F6E;&#x7684;&#x65F6;&#x95F4;&#x9608;&#x503C;&#x5185;&#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#xFF0C;&#x5373;&#x53EF;&#x5224;&#x5B9A;&#x4E3A;&#x5361;&#x987F;&#x3002;</li>
+</ol>
+<h3 id="&#x76D1;&#x63A7;fps-cadisplaylink"><a name="&#x76D1;&#x63A7;fps-cadisplaylink" class="plugin-anchor" href="#&#x76D1;&#x63A7;fps-cadisplaylink"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76D1;&#x63A7;FPS-CADisplayLink</h3>
+<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x7EA6;&#x5B9A;60FPS&#x5373;&#x4E3A;&#x6D41;&#x7545;&#x3002;&#x90A3;&#x4E48;&#x53CD;&#x8FC7;&#x6765;&#xFF0C;&#x5982;&#x679C;App&#x5728;&#x8FD0;&#x884C;&#x671F;&#x95F4;&#x51FA;&#x73B0;&#x4E86;&#x6389;&#x5E27;&#xFF0C;&#x5373;&#x53EF;&#x8BA4;&#x4E3A;&#x51FA;&#x73B0;&#x4E86;&#x5361;&#x987F;&#x3002;</p>
+<p>&#x76D1;&#x63A7;FPS&#x7684;&#x65B9;&#x6848;&#x51E0;&#x4E4E;&#x90FD;&#x662F;&#x57FA;&#x4E8E; <strong>CADisplayLink</strong> &#x5B9E;&#x73B0;&#x7684;&#x3002;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;CADisplayLink&#xFF1A;CADisplayLink&#x662F;&#x4E00;&#x4E2A;&#x548C;&#x5C4F;&#x5E55;&#x5237;&#x65B0;&#x7387;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x7684;&#x5B9A;&#x65F6;&#x5668;&#xFF0C;&#x4E00;&#x4F46; CADisplayLink &#x4EE5;&#x7279;&#x5B9A;&#x7684;&#x6A21;&#x5F0F;&#x6CE8;&#x518C;&#x5230;runloop&#x4E4B;&#x540E;&#xFF0C;&#x6BCF;&#x5F53;&#x5C4F;&#x5E55;&#x9700;&#x8981;&#x5237;&#x65B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;runloop&#x5C31;&#x4F1A;&#x8C03;&#x7528;CADisplayLink&#x7ED1;&#x5B9A;&#x7684;target&#x4E0A;&#x7684;selector&#x3002;
+&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5411;RunLoop&#x4E2D;&#x6DFB;&#x52A0;CADisplayLink&#xFF0C;&#x6839;&#x636E;&#x5176;&#x56DE;&#x8C03;&#x6765;&#x8BA1;&#x7B97;&#x51FA;&#x5F53;&#x524D;&#x753B;&#x9762;&#x7684;&#x5E27;&#x6570;&#x3002;</p>
+<p>&#x4F7F;&#x7528;FPS&#xFF0C;&#x5373;&#x4F7F;&#x77E5;&#x9053;&#x4E86;&#x5361;&#x987F;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x8981;&#x81EA;&#x5DF1;&#x53BB;&#x67E5;&#x627E;&#xFF0C;&#x65E0;&#x6CD5;&#x5FEB;&#x901F;&#x7684;&#x5B9A;&#x4F4D;&#x5230;&#x5E95;&#x662F;&#x90A3;&#x4E2A;&#x65B9;&#x6CD5;&#x5F15;&#x8D77;&#x7684;&#x5361;&#x987F;</p>
+<pre><code class="lang-Objective-C">#import &quot;FPSMonitor.h&quot;
+#import &quot;FPSMonitor.h&quot;
+#import &lt;UIKit/UIKit.h&gt;
+
+@interface FPSMonitor ()
+@property (nonatomic, strong) CADisplayLink* link;
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, assign) NSTimeInterval lastTime;
+@end
+@implementation FPSMonitor
+
+- (void)beginMonitor {
+    _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(fpsInfoCaculate:)];
+    [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+}
+
+- (void)fpsInfoCaculate:(CADisplayLink *)sender {
+    if (_lastTime == 0) {
+        _lastTime = sender.timestamp;
+        return;
+    }
+
+    _count++;
+    double deltaTime = sender.timestamp - _lastTime;
+    if (deltaTime &gt;= 1) {
+        NSInteger FPS = _count / deltaTime;
+        _lastTime = sender.timestamp;
+        _count = 0;
+        NSLog(@&quot;FPS: %li&quot;, (NSInteger)ceill(FPS + 0.5));
+    }
+}
+
+@end
+</code></pre>
+<p>Matrix&#x662F;&#x817E;&#x8BAF;&#x5F00;&#x6E90;&#x7684;&#x4E00;&#x6B3E;&#x7528;&#x4E8E;&#x6027;&#x80FD;&#x76D1;&#x6D4B;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x6846;&#x67B6;&#x4E2D;&#x6709;&#x4E00;&#x6B3E;&#x63D2;&#x4EF6;WCFPSMonitorPlugin&#xFF1A;&#x8FD9;&#x662F;&#x4E00;&#x6B3E;FPS&#x76D1;&#x63A7;&#x5DE5;&#x5177;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x6ED1;&#x52A8;&#x754C;&#x9762;&#x65F6;&#xFF0C;&#x8BB0;&#x5F55;&#x4E3B;&#x7EBF;&#x7A0B;&#x7684;&#x8C03;&#x7528;&#x6808;&#x3002;&#x5B83;&#x7684;&#x6E90;&#x7801;&#x4E2D;&#x548C;&#x6211;&#x4EEC;&#x4E0A;&#x8FF0;&#x63D0;&#x5230;&#x7684;&#x901A;&#x8FC7;CADisplayLink&#x6765;&#x6765;&#x76D1;&#x6D4B;&#x5361;&#x987F;&#x7684;&#x65B9;&#x6848;&#x7684;&#x539F;&#x7406;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-Objective-C">- (void)startDisplayLink:(NSString *)scene {
+    FPSInfo(@&quot;startDisplayLink&quot;);
+
+    m_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(onFrameCallback:)];
+    [m_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+
+  ...
+}
+
+- (void)onFrameCallback:(id)sender {
+    // &#x5F53;&#x524D;&#x65F6;&#x95F4;: &#x5355;&#x4F4D;&#x4E3A;&#x79D2;
+    double nowTime = CFAbsoluteTimeGetCurrent();
+    // &#x5C06;&#x5355;&#x4F4D;&#x8F6C;&#x5316;&#x4E3A;&#x6BEB;&#x79D2;
+    double diff = (nowTime - m_lastTime) * 1000;
+
+  // 1&#x3001;&#x5982;&#x679C;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x7684;&#x5E27;&#x95F4;&#x9694;&#xFF1A;&#x90A3;&#x4E48;&#x6B64;&#x6B21;&#x5C4F;&#x5E55;&#x5237;&#x65B0;&#x65B9;&#x6CD5;&#x8D85;&#x65F6;
+    if (diff &gt; self.pluginConfig.maxFrameInterval) {
+        m_currRecorder.dumpTimeTotal += diff;
+        m_dropTime += self.pluginConfig.maxFrameInterval * pow(diff / self.pluginConfig.maxFrameInterval, self.pluginConfig.powFactor);
+
+        // &#x603B;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF1A;&#x5C55;&#x793A;&#x8D85;&#x65F6;&#x4FE1;&#x606F;
+        if (m_currRecorder.dumpTimeTotal &gt; self.pluginConfig.dumpInterval * self.pluginConfig.dumpMaxCount) {
+            FPSInfo(@&quot;diff %lf exceed, begin: %lf, end: %lf, scene: %@, you can see more detail in record id: %d&quot;,
+                    m_currRecorder.dumpTimeTotal,
+                    m_currRecorder.dumpTimeBegin,
+                    m_currRecorder.dumpTimeBegin + m_currRecorder.dumpTimeTotal / 1000.0,
+                    m_scene,
+                    m_currRecorder.recordID);
+      ...... 
+        }
+    // 2&#x3001;&#x5982;&#x679C;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x6CA1;&#x6709;&#x6700;&#x5927;&#x7684;&#x5E27;&#x95F4;&#x9694;&#xFF1A;&#x90A3;&#x4E48;&#x6B64;&#x6B21;&#x5C4F;&#x5E55;&#x5237;&#x65B0;&#x65B9;&#x6CD5;&#x4E0D;&#x8D85;&#x65F6;
+    } else {
+        // &#x603B;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF1A;&#x5C55;&#x793A;&#x8D85;&#x65F6;&#x4FE1;&#x606F;
+        if (m_currRecorder.dumpTimeTotal &gt; self.pluginConfig.maxDumpTimestamp) {
+            FPSInfo(@&quot;diff %lf exceed, begin: %lf, end: %lf, scene: %@, you can see more detail in record id: %d&quot;,
+                    m_currRecorder.dumpTimeTotal,
+                    m_currRecorder.dumpTimeBegin,
+                    m_currRecorder.dumpTimeBegin + m_currRecorder.dumpTimeTotal / 1000.0,
+                    m_scene,
+                    m_currRecorder.recordID);
+      ....
+    // &#x603B;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E0D;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF1A;&#x5C06;&#x65F6;&#x95F4;&#x5F52;0 &#x91CD;&#x65B0;&#x8BA1;&#x6570;
+        } else {
+            m_currRecorder.dumpTimeTotal = 0;
+            m_currRecorder.dumpTimeBegin = nowTime + 0.0001;
+        }
+    }
+    m_lastTime = nowTime;
+}
+</code></pre>
+<h3 id="cadisplaylink&#x5E94;&#x7528;&#x573A;&#x666F;"><a name="cadisplaylink&#x5E94;&#x7528;&#x573A;&#x666F;" class="plugin-anchor" href="#cadisplaylink&#x5E94;&#x7528;&#x573A;&#x666F;"><i class="fa fa-link" aria-hidden="true"></i></a>CADisplayLink&#x5E94;&#x7528;&#x573A;&#x666F;</h3>
+<ol>
+<li>&#x9002;&#x5408;&#x505A;UI&#x7684;&#x4E0D;&#x505C;&#x91CD;&#x7ED8;&#xFF0C;&#x8FC7;&#x6E21;&#x76F8;&#x5BF9;&#x6D41;&#x7545;&#xFF0C;&#x65E0;&#x5361;&#x987F;&#x611F;</li>
+</ol>
+<p>CADisplayLink&#x5F97;&#x76CA;&#x4E8E;&#x548C;&#x663E;&#x793A;&#x5668;&#x5237;&#x65B0;&#x7387;&#x540C;&#x9891;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5B83;&#x7684;&#x56DE;&#x8C03;&#x5185;&#x505A;&#x7ED8;&#x5236;&#xFF0C;&#x52A8;&#x753B;&#x5C06;&#x662F;&#x76F8;&#x5F53;&#x987A;&#x6ED1;&#xFF0C;&#x7528;&#x6237;&#x4E0D;&#x4F1A;&#x611F;&#x77E5;&#x5230;&#x4EFB;&#x4F55;&#x5361;&#x987F;&#x3002; &#x5F39;&#x5E55;&#x6548;&#x679C;&#xFF0C;&#x548C;&#x6C34;&#x6CE2;&#x7EB9;&#x52A8;&#x753B;&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;CADisplayLink&#x6210;&#x672C;&#x8F83;&#x4F4E;&#x5F97;&#x5B9E;&#x73B0;&#x3002;</p>
+<ol>
+<li>&#x975E;UI&#x66F4;&#x65B0;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x6BD4;&#x5982;&#x5B9E;&#x73B0;&#x97F3;&#x91CF;EasyIn&#x3001;EasyOut&#x6548;&#x679C;</li>
+</ol>
+<p>&#x97F3;&#x4E50;&#x64AD;&#x653E;&#x7C7B;App&#x5728;&#x97F3;&#x4E50;&#x5207;&#x6362;&#x65F6;&#xFF0C;&#x5E73;&#x6ED1;&#x964D;&#x4F4E;&#x4E0A;&#x4E00;&#x9996;&#x97F3;&#x91CF;&#xFF0C;&#x518D;&#x5E73;&#x6ED1;&#x63D0;&#x9AD8;&#x4E0B;&#x4E00;&#x9996;&#x97F3;&#x91CF;&#xFF0C;&#x5229;&#x7528;CADisplayLink&#x7684;&#x7279;&#x6027;&#x53EF;&#x4EE5;&#x5E73;&#x6ED1;&#x5B9E;&#x73B0;&#x76F8;&#x5E94;&#x7684;&#x66F2;&#x7EBF;&#x6548;&#x679C;&#x3002;</p>
+<h3 id="&#x53C2;&#x8003;&#x94FE;&#x63A5;"><a name="&#x53C2;&#x8003;&#x94FE;&#x63A5;" class="plugin-anchor" href="#&#x53C2;&#x8003;&#x94FE;&#x63A5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x53C2;&#x8003;&#x94FE;&#x63A5;</h3>
+<p><a href="https://github.com/Tencent/matrix#matrix_ios_cn" target="_blank">Matrix&#x5B98;&#x7F51;</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../objc/内存管理.html" class="navigation navigation-prev " aria-label="Previous page: 内存管理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../objc/APP启动优化及瘦身.html" class="navigation navigation-next " aria-label="Next page: APP启动优化及瘦身">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"卡顿与性能优化","level":"1.2.8","depth":2,"next":{"title":"APP启动优化及瘦身","level":"1.2.9","depth":2,"path":"content/objc/APP启动优化及瘦身.md","ref":"content/objc/APP启动优化及瘦身.md","articles":[]},"previous":{"title":"内存管理","level":"1.2.7","depth":2,"path":"content/objc/内存管理.md","ref":"content/objc/内存管理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["jsbin","anchors","video","-ga","toggle-chapters","-editlink","include-codeblock","splitter","-github-buttons","chart","include-highlight","tonic","chapter-fold","back-to-top-button","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"chapter-fold":{},"livereload":{},"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"tonic":{},"include-highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"fontSettings":{"theme":"white","family":"sans"},"highlight":{},"back-to-top-button":{},"video":{},"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"jsbin":{},"chart":{"type":"c3"},"toggle-chapters":{}},"theme":"theme","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"isPdf":false},"title":"iOS面试文档","language":"zh","gitbook":"*","description":null},"file":{"path":"content/framework/卡顿与性能优化.md","mtime":"2022-12-15T02:50:32.258Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-12-15T02:53:04.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-jsbin/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://embed.tonicdev.com"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-tonic/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

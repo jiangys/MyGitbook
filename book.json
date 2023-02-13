@@ -1,0 +1,36 @@
+
+{
+    "generator": "site",
+    "title": "iOS面试文档",
+    "description": null,
+    "structure": {
+        "readme": "README.md"
+    },
+    "language": "zh",
+    "plugins": [
+        "jsbin",
+        "anchors",
+        "video",
+        "-ga",
+        "toggle-chapters",
+        "-editlink",
+        "include-codeblock",
+        "splitter",
+        "-github-buttons",
+        "chart",
+        "include-highlight",
+        "tonic",
+        "chapter-fold",
+        "back-to-top-button"
+    ],
+    "theme": "theme",
+    "pluginsConfig": {
+        "fontSettings": {
+            "theme": "white",
+            "family": "sans"
+        }
+    },
+    "variables": {
+        "isPdf": false
+    }
+}
